@@ -1,13 +1,21 @@
 const express = require("express");
 const { celebrate, Segments, Joi } = require("celebrate");
 
-// Importar controllers
-
+const AlunosController = require("./controllers/AlunosController");
 const routes = express.Router();
 
-routes.get("/teste", (req, res) => {
-  console.log(req.body);
-  res.json({ message: "Hello" });
-});
+routes.get("/alunos", AlunosController.index);
+routes.post(
+  "/alunos",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      nome: Joi.string().required(),
+      endereco: Joi.string().required(),
+      telefone: Joi.string().required().min(10),
+      fotoUrl: Joi.string().required(),
+    }),
+  }),
+  AlunosController.create
+);
 
 module.exports = routes;

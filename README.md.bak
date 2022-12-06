@@ -10,6 +10,3 @@ npm install knex -g
 
 NECESSÁRIO RODAR O COMANDO 
 knex migrate:latest
-
-LIMPAR BANCO DE DADOS
-knex migrate:rollback --all
