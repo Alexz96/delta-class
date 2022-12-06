@@ -1,0 +1,8 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "Backend for Delta Class",
+  "main": "index.js",
+  "author": "Alexsander Oliveira",
+  "license": "MIT"
+}
