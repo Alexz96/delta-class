@@ -5,6 +5,7 @@ const AlunosController = require("./controllers/AlunosController");
 const routes = express.Router();
 
 routes.get("/alunos", AlunosController.index);
+
 routes.post(
   "/alunos",
   celebrate({
@@ -16,6 +17,30 @@ routes.post(
     }),
   }),
   AlunosController.create
+);
+
+routes.put(
+  "/aluno",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      id: Joi.number().required(),
+      nome: Joi.string(),
+      endereco: Joi.string(),
+      telefone: Joi.string().min(10),
+      fotoUrl: Joi.string(),
+    }),
+  }),
+  AlunosController.update
+);
+
+routes.delete(
+  "/aluno",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      id: Joi.number().required(),
+    }),
+  }),
+  AlunosController.delete
 );
 
 module.exports = routes;

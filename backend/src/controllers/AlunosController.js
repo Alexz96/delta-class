@@ -21,18 +21,34 @@ module.exports = {
       fotoUrl,
     });
 
-    return response.json({
-      code: 200,
+    return response.status(201).json({
       message: "Cadastrado com sucesso!",
       data: [],
     });
   },
 
   async delete(request, response) {
-    return response.json({ message: "Implementar" });
+    const { id } = request.body;
+    
+    await connection("alunos")
+      .where("id", id)
+      .del(["id", "nome"]);
+
+    return response.status(200).json({
+      message: `Aluno excluído com sucesso`,
+      data: [],
+    });
   },
 
   async update(request, response) {
-    return response.json({ message: "Implementar" });
+    const dados = request.body;
+    const aluno = await connection("alunos")
+      .where("id", dados.id)
+      .update(dados);
+
+    return response.json({
+      message: "Atualizado com sucesso!",
+      data: [],
+    });
   },
 };
