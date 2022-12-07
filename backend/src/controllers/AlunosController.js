@@ -29,10 +29,8 @@ module.exports = {
 
   async delete(request, response) {
     const { id } = request.body;
-    
-    await connection("alunos")
-      .where("id", id)
-      .del(["id", "nome"]);
+
+    await connection("alunos").where("id", id).del(["id", "nome"]);
 
     return response.status(200).json({
       message: `Aluno excluído com sucesso`,
@@ -42,12 +40,27 @@ module.exports = {
 
   async update(request, response) {
     const dados = request.body;
-    const aluno = await connection("alunos")
-      .where("id", dados.id)
-      .update(dados);
+
+    console.log(request);
+
+    await connection("alunos").where("id", dados.id).update(dados);
 
     return response.json({
       message: "Atualizado com sucesso!",
+      data: [],
+    });
+  },
+
+  async uploadFoto(request, response) {
+    console.log(request);
+
+    const { id } = request.query;
+    const { path } = request.file;
+
+    await connection("alunos").where("id", id).update({ fotoUrl: path });
+
+    return response.status(200).json({
+      message: "Atualizado foto de perfil com sucesso!",
       data: [],
     });
   },
