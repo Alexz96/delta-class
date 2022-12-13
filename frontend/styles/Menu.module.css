@@ -3,4 +3,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #CCC;
+    width: 400px;
+    height: 500px;
+    margin-top: 25vh;
+    margin-left: 40vw;
+    border: 5px solid black;
+    border-radius: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0C4767;
+    color: #fff;
+    width: 150px;
+    height: 50px;
+    margin: 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
 }
