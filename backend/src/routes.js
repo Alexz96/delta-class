@@ -41,7 +41,7 @@ routes.put(
       nome: Joi.string(),
       endereco: Joi.string(),
       telefone: Joi.string().min(10),
-      fotoUrl: Joi.string(),
+      fotoUrl: Joi.string().empty(),
     }),
   }),
   AlunosController.update

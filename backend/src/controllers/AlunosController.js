@@ -14,16 +14,18 @@ module.exports = {
   async create(request, response) {
     const { nome, endereco, telefone, fotoUrl } = request.body;
 
-    await connection("alunos").insert({
-      nome,
-      endereco,
-      telefone,
-      fotoUrl,
-    });
+    const alunoCadastrado = await connection("alunos")
+      .insert({
+        nome,
+        endereco,
+        telefone,
+        fotoUrl,
+      })
+      .returning("id");
 
     return response.status(201).json({
       message: "Cadastrado com sucesso!",
-      data: [],
+      data: alunoCadastrado,
     });
   },
 
@@ -33,7 +35,7 @@ module.exports = {
     await connection("alunos").where("id", id).del(["id", "nome"]);
 
     return response.status(200).json({
-      message: `Aluno excluído com sucesso`,
+      message: "Aluno excluído com sucesso",
       data: [],
     });
   },
@@ -57,11 +59,14 @@ module.exports = {
     const { id } = request.query;
     const { path } = request.file;
 
-    await connection("alunos").where("id", id).update({ fotoUrl: path });
+    const caminhoArquivo = await connection("alunos")
+      .where("id", id)
+      .update({ fotoUrl: path })
+      .returning("fotoUrl");
 
     return response.status(200).json({
       message: "Atualizado foto de perfil com sucesso!",
-      data: [],
+      data: caminhoArquivo,
     });
   },
 };

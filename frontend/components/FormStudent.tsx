@@ -12,13 +12,16 @@ export default function FormStudent() {
     if (event.target.files && event.target.files[0]) {
       const image = event.target.files[0];
 
-      const params = new URLSearchParams();
-      params.append("avatar", image);
+      const body = new FormData();
+      body.append("avatar", image);
 
       axios
-        .post("http://localhost:3333/aluno/foto?id=6", params)
+        .post("http://localhost:3333/aluno/foto?id=6", body, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((res) => {
-          // TODO: CRIAR RETORNO DA URL DO ARQUIVO NO BACKEND E SALVAR NO fotoUrl PARA ENVIAR
+          const url = res.data.data[0].fotoUrl;
+          setFotoUrl(url);
         })
         .catch((error) => {
           console.log("Erro Upload Foto: ", error);
@@ -27,8 +30,6 @@ export default function FormStudent() {
   };
 
   function submitForm() {
-    setFotoUrl("apenas/um/teste");
-
     axios
       .post("http://localhost:3333/alunos", {
         nome,
