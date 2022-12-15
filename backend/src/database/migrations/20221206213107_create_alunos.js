@@ -8,7 +8,7 @@ exports.up = function(knex) {
     table.string('nome').notNullable();
     table.string('endereco').notNullable();
     table.string('telefone').notNullable();
-    table.string('fotoUrl').notNullable();
+    table.string('fotoUrl');
   })
 };
 

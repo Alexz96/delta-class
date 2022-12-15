@@ -27,7 +27,7 @@ routes.post(
       nome: Joi.string().required(),
       endereco: Joi.string().required(),
       telefone: Joi.string().required().min(10),
-      fotoUrl: Joi.string().required(),
+      fotoUrl: Joi.string().empty(),
     }),
   }),
   AlunosController.create
@@ -68,6 +68,16 @@ routes.post(
   function (req, res, next) {
     return AlunosController.uploadFoto(req, res);
   }
+);
+
+routes.get(
+  "/getDadosAluno",
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      id: Joi.number().required(),
+    }),
+  }),
+  AlunosController.show
 );
 
 module.exports = routes;

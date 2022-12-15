@@ -54,8 +54,6 @@ module.exports = {
   },
 
   async uploadFoto(request, response) {
-    console.log(request);
-
     const { id } = request.query;
     const { path } = request.file;
 
@@ -67,6 +65,17 @@ module.exports = {
     return response.status(200).json({
       message: "Atualizado foto de perfil com sucesso!",
       data: caminhoArquivo,
+    });
+  },
+
+  async show(request, response) {
+    const { id } = request.query;
+
+    const dados = await connection("alunos").where("id", id).select("*");
+
+    return response.status(200).json({
+      message: "Busca concluída com sucesso!",
+      data: dados,
     });
   },
 };

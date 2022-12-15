@@ -1,7 +1,7 @@
 import Head from "next/head";
-import NextLink from "next/link"
+import NextLink from "next/link";
 import FormStudent from "../components/FormStudent";
-import styles from "../styles/NewStudent.module.css"
+import styles from "../styles/NewStudent.module.css";
 
 export default function NewStudent() {
   return (
